@@ -26,9 +26,9 @@ export default {
       api: {
         apiUrl: 'https://api.themoviedb.org/3/search/movie',
         apiKey: 'cb304e29663a7b9973c26a03b4532795',
-        apiLanguage: 'it-IT',
-        apiQuery: 'ritorno al futuro'
+        apiLanguage: 'it-IT'
       },
+      title: 'ritorno al futuro',
       movieArray: []
     }
   },
@@ -38,7 +38,7 @@ export default {
         params: {
           api_key: this.api.apiKey,
           language: this.api.apiLanguage,
-          query: this.api.apiQuery
+          query: this.title
         }
       })
       .then (response => {
