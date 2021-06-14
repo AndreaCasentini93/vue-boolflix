@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <!-- HEADER -->
-    <!-- /HEADER -->
     <Header />
+    <!-- /HEADER -->
 
     <!-- MAIN -->
     <Main />
@@ -23,21 +23,29 @@ export default {
   },
   data: function() {
     return {
-      apiUrl: 'https://api.themoviedb.org/3/search/movie',
-      title: 'ritorno al futuro'
+      api: {
+        apiUrl: 'https://api.themoviedb.org/3/search/movie',
+        apiKey: 'cb304e29663a7b9973c26a03b4532795',
+        apiLanguage: 'it-IT',
+        apiQuery: 'ritorno al futuro'
+      }
     }
   },
   created: function() {
     axios
-      .get(this.apiUrl, {
+      .get(this.api.apiUrl, {
         params: {
-          api_key: 'cb304e29663a7b9973c26a03b4532795',
-          language: 'it-IT',
-          query: this.title
+          api_key: this.api.apiKey,
+          language: this.api.apiLanguage,
+          query: this.api.apiQuery
         }
       })
       .then (response => {
         console.log(response.data.results);
+        console.log(response.data.results[0].title);
+        console.log(response.data.results[0].original_title);
+        console.log(response.data.results[0].original_language);
+        console.log(response.data.results[0].vote_average);
       })
       .catch()
   }
