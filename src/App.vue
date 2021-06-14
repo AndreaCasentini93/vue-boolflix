@@ -36,6 +36,11 @@ export default {
         apiKey: 'cb304e29663a7b9973c26a03b4532795',
         apiLanguage: 'it-IT'
       },
+      tvSeriesApi: {
+        apiUrl: 'https://api.themoviedb.org/3/search/tv',
+        apiKey: 'cb304e29663a7b9973c26a03b4532795',
+        apiLanguage: 'it-IT'
+      },
       title: 'a',
       movies: [],
       loading: true
@@ -71,6 +76,17 @@ export default {
       })
       .then (response => {
         this.movies = response.data.results;
+      })
+    axios
+      .get(this.tvSeriesApi.apiUrl, {
+        params: {
+          api_key: this.tvSeriesApi.apiKey,
+          language: this.tvSeriesApi.apiLanguage,
+          query: this.title
+        }
+      })
+      .then (response => {
+        this.movies = [...this.movies, ...response.data.results].sort();
         this.loading = false;
       })
       .catch()
