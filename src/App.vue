@@ -31,7 +31,7 @@ export default {
   },
   data: function() {
     return {
-      api: {
+      moviesApi: {
         apiUrl: 'https://api.themoviedb.org/3/search/movie',
         apiKey: 'cb304e29663a7b9973c26a03b4532795',
         apiLanguage: 'it-IT'
@@ -51,10 +51,10 @@ export default {
       this.loading = true;
       this.title = val;
       axios
-        .get(this.api.apiUrl, {
+        .get(this.moviesApi.apiUrl, {
           params: {
-            api_key: this.api.apiKey,
-            language: this.api.apiLanguage,
+            api_key: this.moviesApi.apiKey,
+            language: this.moviesApi.apiLanguage,
             query: this.title
           }
         })
@@ -79,10 +79,10 @@ export default {
   },
   created: function() {
     axios
-      .get(this.api.apiUrl, {
+      .get(this.moviesApi.apiUrl, {
         params: {
-          api_key: this.api.apiKey,
-          language: this.api.apiLanguage,
+          api_key: this.moviesApi.apiKey,
+          language: this.moviesApi.apiLanguage,
           query: this.title
         }
       })

@@ -80,8 +80,10 @@ export default {
         width: calc((100% / 5) - 40px);
         height: 328.8px;
         padding: 30px 15px 50px 15px;
+        border: 1px solid lighten($bg-color, 20%);
         margin: 20px;
-        background-color: black;
+        background-color: $bg-color;
+        transition: border .3s linear;
 
         .poster {
             display: block;
@@ -91,8 +93,12 @@ export default {
             width: 100%;
             height: 100%;
             text-align: center;
-            background-color: black;
+            background-color: $bg-color;
             transition: opacity .3s linear;
+        }
+
+        &:hover {
+            border: 1px solid $base-color;
         }
 
         &:hover > .poster {

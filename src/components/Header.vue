@@ -30,7 +30,13 @@ export default {
     @import '../assets/style/mixins.scss';
 
     header {
-        background-color: black;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 90px;
+        background-color: $bg-color;
+        z-index: 1;
 
         nav {
             padding: 20px 30px;

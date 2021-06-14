@@ -46,8 +46,13 @@ export default {
 
             button {
                 border: unset;
-                color: $base-color;
+                color: darken($base-color, 50%);
                 background-color: unset;
+                transition: color .3s linear;
+
+                &:hover {
+                    color: $base-color;
+                }
             }
 
             input {
