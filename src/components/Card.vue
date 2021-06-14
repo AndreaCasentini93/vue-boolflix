@@ -22,9 +22,9 @@
                 <template v-else>{{ language.toUpperCase() }}</template>
             </li>
             <li class="d-flex">
-                <strong>Voto</strong>: {{ vote }} 
+                <strong>Voto</strong>: 
                 <span class="d-flex justify-content-between">
-                    <i v-for="number,index in 5" :key="index" :class="enterStar" class="far fa-star"></i>
+                    <i v-for="number,index in 5" :key="index" :class="enterStar(index, vote)" class="fa-star"></i>
                 </span>
             </li>
         </ul>
@@ -69,6 +69,13 @@ export default {
         },
         selectImgAlt: function(language) {
             return language == 'en'? 'EN':'IT';
+        },
+        enterStar: function(index, vote) {
+            if ((index + 1) <= vote) {
+                return 'fas';
+            } else {
+                return 'far';
+            }
         }
     }
 }
@@ -132,6 +139,8 @@ export default {
                 }
 
                 span {
+                    margin-left: 5px;
+
                     i.fas {
                         margin: 0 1px;
                         color: $star-color;
