@@ -3,7 +3,7 @@
         <img 
             class="poster"
             :src="'https://image.tmdb.org/t/p/w342' + movie.poster_path" 
-            :alt="title? title:name">
+            :alt="'Immagine ' + (title? title:name)">
         <ul>
             <li>
                 <strong>Titolo</strong>: 
@@ -89,6 +89,9 @@ export default {
             top: 0;
             left: 0;
             width: 100%;
+            height: 100%;
+            text-align: center;
+            background-color: black;
             transition: opacity .3s linear;
         }
 
