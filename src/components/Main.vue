@@ -3,7 +3,7 @@
         <section v-if="movies.length != 0" class="container d-flex flex-wrap">
             <Card v-for="movie, index in movies" :key="index" :movieDetails="movie"/>
         </section>
-        <div v-else class="not-found d-flex justify-content-center align-items-center">Nessun risultato trovato</div>
+        <section v-else class="not-found d-flex justify-content-center align-items-center">Nessun risultato trovato</section>
     </main>
 </template>
 
