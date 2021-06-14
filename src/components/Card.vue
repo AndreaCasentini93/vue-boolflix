@@ -3,29 +3,26 @@
         <img 
             class="poster"
             :src="'https://image.tmdb.org/t/p/w342' + movie.poster_path" 
-            :alt="movie.name == undefind? movie.title:movie.name">
+            :alt="title? title:name">
         <ul>
             <li>
                 <strong>Titolo</strong>: 
-                {{ movie.name == undefind? movie.title:movie.name  }}
+                {{ title? title:name  }}
             </li>
             <li>
                 <strong>Titolo originale</strong>: 
-                {{ movie.original_name == undefind? movie.original_title:movie.original_name }}
+                {{ title? originalTitle:originalName }}
             </li>
             <li>
                 <strong>Lingua originale</strong>: 
                 <img class="flag" 
-                    v-if="selectImgFlag(movie.original_language)" 
-                    :src="selectImgSrc(movie.original_language)" 
-                    :alt="selectImgAlt(movie.original_language)">
-                <template v-else>
-                    {{ movie.original_language.toUpperCase() }}
-                </template>
+                    v-if="selectImgFlag(language)" 
+                    :src="selectImgSrc(language)" 
+                    :alt="selectImgAlt(language)">
+                <template v-else>{{ language.toUpperCase() }}</template>
             </li>
             <li>
-                <strong>Voto</strong>: 
-                {{ ((movie.vote_average * 5) / 10).toFixed(0) }}
+                <strong>Voto</strong>: {{ vote }}
             </li>
         </ul>
     </a>
@@ -40,6 +37,24 @@ export default {
     computed: {
         movie: function() {
             return this.movieDetails
+        },
+        title: function() {
+            return this.movie.title;
+        },
+        name: function() {
+            return this.movie.name;
+        },
+        originalTitle: function() {
+            return this.movie.original_title;
+        },
+        originalName: function() {
+            return this.movie.original_name;
+        },
+        language: function() {
+            return this.movie.original_language;
+        },
+        vote: function() {
+            return ((this.movie.vote_average * 5) / 10).toFixed(0);
         }
     },
     methods: {
