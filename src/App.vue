@@ -60,9 +60,21 @@ export default {
         })
         .then (response => {
           this.movies = response.data.results;
-          this.loading = false;
         })
         .catch()
+        axios
+          .get(this.tvSeriesApi.apiUrl, {
+            params: {
+              api_key: this.tvSeriesApi.apiKey,
+              language: this.tvSeriesApi.apiLanguage,
+              query: this.title
+            }
+          })
+          .then (response => {
+            this.movies = [...this.movies, ...response.data.results].sort();
+            this.loading = false;
+          })
+          .catch()
     }
   },
   created: function() {

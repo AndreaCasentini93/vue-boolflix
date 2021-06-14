@@ -3,11 +3,11 @@
         <ul>
             <li>
                 <strong>Titolo</strong>: 
-                {{ movie.title }}
+                {{ movie.name == undefind? movie.title:movie.name  }}
             </li>
             <li>
                 <strong>Titolo originale</strong>: 
-                {{ movie.original_title }}
+                {{ movie.original_name == undefind? movie.original_title:movie.original_name }}
             </li>
             <li>
                 <strong>Lingua originale</strong>: 
@@ -16,7 +16,7 @@
             </li>
             <li>
                 <strong>Voto</strong>: 
-                {{ ((movie.vote_average * 5) / 10) }}
+                {{ ((movie.vote_average * 5) / 10).toFixed(1) }}
             </li>
         </ul>
     </a>
