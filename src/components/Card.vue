@@ -21,8 +21,11 @@
                     :alt="selectImgAlt(language)">
                 <template v-else>{{ language.toUpperCase() }}</template>
             </li>
-            <li>
-                <strong>Voto</strong>: {{ vote }}
+            <li class="d-flex">
+                <strong>Voto</strong>: {{ vote }} 
+                <span class="d-flex justify-content-between">
+                    <i v-for="number,index in 5" :key="index" :class="index == 0? 'far':'fas' " class="fa-star"></i>
+                </span>
             </li>
         </ul>
     </a>
@@ -126,6 +129,13 @@ export default {
                     object-fit: cover;
                     object-position: center;
                     box-shadow: 0 0 2px .5px $base-color;
+                }
+
+                span {
+                    i.fas {
+                        margin: 0 1px;
+                        color: $star-color;
+                    }
                 }
             }
         }
