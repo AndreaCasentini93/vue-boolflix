@@ -60,17 +60,25 @@ export default {
         ul {
             color: darken($base-color, 40%);
 
-            strong {
-                color: $base-color;
-            }
+            li {
+                line-height: 1.13;
 
-            img {
-                width: 23px;
-                height: 23px;
-                border-radius: 50%;
-                object-fit: cover;
-                object-position: center;
-                box-shadow: 0 0 2px .5px $base-color;
+                &:not(:last-child) {
+                    margin-bottom: 15px;
+                }
+
+                strong {
+                    color: $base-color;
+                }
+
+                img {
+                    width: 23px;
+                    height: 23px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                    object-position: center;
+                    box-shadow: 0 0 2px .5px $base-color;
+                }
             }
         }
     }
