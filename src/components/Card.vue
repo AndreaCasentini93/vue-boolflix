@@ -1,10 +1,24 @@
 <template>
     <a href="#" class="movie_card">
-        <div>{{ 'Titolo: ' + movie.title }}</div>
-        <div>{{ 'Titolo originale: ' + movie.original_title }}</div>
-        <img v-if="selectImgFlag(movie.original_language)" :src="selectImgSrc(movie.original_language)" :alt="selectImgAlt(movie.original_language)">
-        <div v-else>{{ 'Lingua originale: ' + movie.original_language.toUpperCase() }}</div>
-        <div>{{ 'Voto: ' + ((movie.vote_average * 5) / 10) }}</div>
+        <ul>
+            <li>
+                <strong>Titolo</strong>: 
+                {{ movie.title }}
+            </li>
+            <li>
+                <strong>Titolo originale</strong>: 
+                {{ movie.original_title }}
+            </li>
+            <li>
+                <strong>Lingua originale</strong>: 
+                <img v-if="selectImgFlag(movie.original_language)" :src="selectImgSrc(movie.original_language)" :alt="selectImgAlt(movie.original_language)">
+                <template v-else>{{ movie.original_language.toUpperCase() }}</template>
+            </li>
+            <li>
+                <strong>Voto</strong>: 
+                {{ ((movie.vote_average * 5) / 10) }}
+            </li>
+        </ul>
     </a>
 </template>
 
@@ -43,13 +57,21 @@ export default {
         margin: 20px;
         background-color: black;
 
-        img {
-        width: 23px;
-        height: 23px;
-        border-radius: 50%;
-        object-fit: cover;
-        object-position: center;
-        box-shadow: 0 0 2px .5px $base-color;
+        ul {
+            color: darken($base-color, 40%);
+
+            strong {
+                color: $base-color;
+            }
+
+            img {
+                width: 23px;
+                height: 23px;
+                border-radius: 50%;
+                object-fit: cover;
+                object-position: center;
+                box-shadow: 0 0 2px .5px $base-color;
+            }
         }
     }
 </style>
