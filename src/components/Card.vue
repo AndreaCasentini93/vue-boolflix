@@ -1,5 +1,9 @@
 <template>
     <a href="#" class="movie_card">
+        <img 
+            class="poster"
+            :src="'https://image.tmdb.org/t/p/w342' + movie.poster_path" 
+            :alt="movie.name == undefind? movie.title:movie.name">
         <ul>
             <li>
                 <strong>Titolo</strong>: 
@@ -11,12 +15,17 @@
             </li>
             <li>
                 <strong>Lingua originale</strong>: 
-                <img class="flag" v-if="selectImgFlag(movie.original_language)" :src="selectImgSrc(movie.original_language)" :alt="selectImgAlt(movie.original_language)">
-                <template v-else>{{ movie.original_language.toUpperCase() }}</template>
+                <img class="flag" 
+                    v-if="selectImgFlag(movie.original_language)" 
+                    :src="selectImgSrc(movie.original_language)" 
+                    :alt="selectImgAlt(movie.original_language)">
+                <template v-else>
+                    {{ movie.original_language.toUpperCase() }}
+                </template>
             </li>
             <li>
                 <strong>Voto</strong>: 
-                {{ ((movie.vote_average * 5) / 10).toFixed(1) }}
+                {{ ((movie.vote_average * 5) / 10).toFixed(0) }}
             </li>
         </ul>
     </a>
@@ -52,10 +61,25 @@ export default {
     @import '../assets/style/mixins.scss';
 
     .movie_card {
+        position: relative;
         width: calc((100% / 5) - 40px);
+        height: 328.8px;
         padding: 30px 15px 50px 15px;
         margin: 20px;
         background-color: black;
+
+        .poster {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            transition: opacity .3s linear;
+        }
+
+        &:hover > .poster {
+            opacity: 0;
+        }
 
         ul {
             color: darken($base-color, 40%);
