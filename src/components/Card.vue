@@ -39,7 +39,7 @@ export default {
 
     .movie_card {
         width: calc((100% / 5) - 40px);
-        padding: 30px 5px 50px 5px;
+        padding: 30px 15px 50px 15px;
         margin: 20px;
         background-color: black;
 
