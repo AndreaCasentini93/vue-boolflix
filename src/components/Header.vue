@@ -1,7 +1,9 @@
 <template>
     <header>
         <nav class="d-flex justify-content-between align-items-center">
-            <img src="../assets/images/logo-boolflix.png" alt="Logo Boolflix">
+            <a href="#">
+                <img src="../assets/images/logo-boolflix.png" alt="Logo Boolflix">
+            </a>
             <Search @search="titleSearched"/>
         </nav>
     </header>
@@ -33,8 +35,15 @@ export default {
         nav {
             padding: 20px 30px;
 
-            img {
-                width: 150px;
+            a {
+                img {
+                    width: 150px;
+                    transition: filter .3s;
+
+                    &:hover {
+                        filter: brightness(180%);
+                    }
+                }
             }
         }
     }
