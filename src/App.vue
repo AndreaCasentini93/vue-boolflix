@@ -28,7 +28,8 @@ export default {
         apiKey: 'cb304e29663a7b9973c26a03b4532795',
         apiLanguage: 'it-IT',
         apiQuery: 'ritorno al futuro'
-      }
+      },
+      movieArray: []
     }
   },
   created: function() {
@@ -41,11 +42,7 @@ export default {
         }
       })
       .then (response => {
-        console.log(response.data.results);
-        console.log(response.data.results[0].title);
-        console.log(response.data.results[0].original_title);
-        console.log(response.data.results[0].original_language);
-        console.log(response.data.results[0].vote_average);
+        this.movieArray = response.data.results;
       })
       .catch()
   }
