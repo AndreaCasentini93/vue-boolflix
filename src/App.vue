@@ -6,7 +6,7 @@
       <!-- /HEADER -->
 
       <!-- MAIN -->
-      <Main :searchArray="movieArray"/>
+      <Main :searchArray="movies"/>
       <!-- /MAIN -->
     </template>
 
@@ -37,7 +37,7 @@ export default {
         apiLanguage: 'it-IT'
       },
       title: 'a',
-      movieArray: [],
+      movies: [],
       loading: true
     }
   },
@@ -54,7 +54,7 @@ export default {
           }
         })
         .then (response => {
-          this.movieArray = response.data.results;
+          this.movies = response.data.results;
           this.loading = false;
         })
         .catch()
@@ -70,7 +70,7 @@ export default {
         }
       })
       .then (response => {
-        this.movieArray = response.data.results;
+        this.movies = response.data.results;
         this.loading = false;
       })
       .catch()
