@@ -37,6 +37,4 @@ export default {
 
 <style lang="scss">
   @import './assets/style/general.scss';
-  @import './assets/style/mixins.scss';
-  @import './assets/style/variables.scss';
 </style>
