@@ -1,12 +1,20 @@
 <template>
   <div id="app">
-    <!-- HEADER -->
-    <Header />
-    <!-- /HEADER -->
+    <template v-if="!loading">
+      <!-- HEADER -->
+      <Header @search="titleSearched"/>
+      <!-- /HEADER -->
 
-    <!-- MAIN -->
-    <Main />
-    <!-- /MAIN -->
+      <!-- MAIN -->
+      <Main />
+      <!-- /MAIN -->
+    </template>
+
+    <!-- LOADING -->
+    <div v-else class="d-flex justify-content-center align-items-center">
+      <span>Loading</span>
+    </div>
+    <!-- /LOADING -->
   </div>
 </template>
 
@@ -28,8 +36,15 @@ export default {
         apiKey: 'cb304e29663a7b9973c26a03b4532795',
         apiLanguage: 'it-IT'
       },
-      title: 'ritorno al futuro',
-      movieArray: []
+      title: 'a',
+      movieArray: [],
+      loading: true
+    }
+  },
+  methods: {
+    titleSearched: function(val) {
+      this.title = val;
+      console.log(this.movieArray);
     }
   },
   created: function() {
@@ -43,6 +58,7 @@ export default {
       })
       .then (response => {
         this.movieArray = response.data.results;
+        this.loading = false;
       })
       .catch()
   }
