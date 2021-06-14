@@ -1,11 +1,20 @@
 <template>
-    <div class="container">Main</div>
+    <div class="container">
+        {{movieArray[0].title}}
+    </div>
 </template>
 
 <script>
 export default {
-    name: 'Main'
-
+    name: 'Main',
+    props: {
+        searchArray: Array
+    },
+    computed: {
+        movieArray: function() {
+            return this.searchArray;
+        }
+    }
 }
 </script>
 

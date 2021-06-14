@@ -15,11 +15,6 @@ export default {
     components: {
         Search
     },
-    data: function() {
-        return {
-            
-        }
-    },
     methods: {
         titleSearched: function(val) {
             this.$emit('search', val)

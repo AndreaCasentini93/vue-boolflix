@@ -6,13 +6,13 @@
       <!-- /HEADER -->
 
       <!-- MAIN -->
-      <Main />
+      <Main :searchArray="movieArray"/>
       <!-- /MAIN -->
     </template>
 
     <!-- LOADING -->
-    <div v-else class="d-flex justify-content-center align-items-center">
-      <span>Loading</span>
+    <div v-else class="d-flex justify-content-center align-items-center debug">
+      Loading
     </div>
     <!-- /LOADING -->
   </div>
@@ -43,8 +43,21 @@ export default {
   },
   methods: {
     titleSearched: function(val) {
+      this.loading = true;
       this.title = val;
-      console.log(this.movieArray);
+      axios
+        .get(this.api.apiUrl, {
+          params: {
+            api_key: this.api.apiKey,
+            language: this.api.apiLanguage,
+            query: this.title
+          }
+        })
+        .then (response => {
+          this.movieArray = response.data.results;
+          this.loading = false;
+        })
+        .catch()
     }
   },
   created: function() {
@@ -67,4 +80,9 @@ export default {
 
 <style lang="scss">
   @import './assets/style/general.scss';
+
+  .debug {
+    height: 100vh;
+    font-size: 50px;
+  }
 </style>
