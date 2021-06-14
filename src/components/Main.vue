@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        {{movieArray[0].title}}
+        
     </div>
 </template>
 

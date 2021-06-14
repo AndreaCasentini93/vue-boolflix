@@ -53,6 +53,8 @@ export default {
             input {
                 min-width: 150px;
                 padding: 3px 10px;
+                border: unset;
+                border-radius: 5px;
             }
         }
     }
