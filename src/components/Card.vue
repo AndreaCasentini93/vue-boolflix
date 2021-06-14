@@ -11,7 +11,7 @@
             </li>
             <li>
                 <strong>Lingua originale</strong>: 
-                <img v-if="selectImgFlag(movie.original_language)" :src="selectImgSrc(movie.original_language)" :alt="selectImgAlt(movie.original_language)">
+                <img class="flag" v-if="selectImgFlag(movie.original_language)" :src="selectImgSrc(movie.original_language)" :alt="selectImgAlt(movie.original_language)">
                 <template v-else>{{ movie.original_language.toUpperCase() }}</template>
             </li>
             <li>
@@ -71,7 +71,7 @@ export default {
                     color: $base-color;
                 }
 
-                img {
+                .flag {
                     width: 23px;
                     height: 23px;
                     border-radius: 50%;
