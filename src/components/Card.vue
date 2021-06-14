@@ -24,7 +24,7 @@
             <li class="d-flex">
                 <strong>Voto</strong>: {{ vote }} 
                 <span class="d-flex justify-content-between">
-                    <i v-for="number,index in 5" :key="index" :class="index == 0? 'far':'fas' " class="fa-star"></i>
+                    <i v-for="number,index in 5" :key="index" :class="enterStar" class="far fa-star"></i>
                 </span>
             </li>
         </ul>
