@@ -9,7 +9,7 @@
                 <strong>Titolo</strong>: 
                 {{ title? title:name  }}
             </li>
-            <li>
+            <li v-if="title != originalTitle || name != originalName">
                 <strong>Titolo originale</strong>: 
                 {{ title? originalTitle:originalName }}
             </li>
