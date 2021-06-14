@@ -1,16 +1,25 @@
 <template>
   <div id="app">
-    Ciao
+    <!-- HEADER -->
+    <!-- /HEADER -->
+    <Header />
+
+    <!-- MAIN -->
+    <Main />
+    <!-- /MAIN -->
   </div>
 </template>
 
 <script>
 import axios from 'axios';
+import Header from './components/Header.vue';
+import Main from './components/Main.vue';
 
 export default {
   name: 'App',
   components: {
-    
+    Header,
+    Main
   },
   data: function() {
     return {
