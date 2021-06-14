@@ -33,10 +33,15 @@ export default {
     main {
         height: 100vh;
         padding-top: 90px;
+        padding-right: 30px;
+        padding-left: 30px;
 
         .not-found {
             height: 100%;
+            text-transform: uppercase;
             font-size: 50px;
+            font-weight: 700;
+            color: $base-color;
         }
     }
 </style>

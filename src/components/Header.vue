@@ -1,10 +1,40 @@
 <template>
     <header>
         <nav class="d-flex justify-content-between align-items-center">
-            <a href="#">
-                <img src="../assets/images/logo-boolflix.png" alt="Logo Boolflix">
-            </a>
-            <Search @search="titleSearched"/>
+            <!-- NAVBAR LEFT -->
+            <div class="navbar_left d-flex justify-content-between align-items-center">
+                <a href="#">
+                    <img src="../assets/images/logo-boolflix.png" alt="Logo Boolflix">
+                </a>
+                <ul class="d-flex">
+                    <li v-for="link, index in menu" :key="index">
+                        <a href="#">{{ link }}</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /NAVBAR LEFT -->
+
+            <!-- NAVBAR RIGHT -->
+            <div class="navbar_right d-flex align-items-center">
+                <Search @search="titleSearched"/>
+                <ul class="d-flex align-items-center">
+                    <li>
+                        <a href="#" class="uppercase">BAMBINI</a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-bell"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="d-flex align-items-center">
+                            <img class="netflix_profile" src="../assets/images/profilo-netflix.png" alt="Profilo Netflix">
+                            <i class="fas fa-chevron-down"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /NAVBAR RIGHT -->
         </nav>
     </header>
 </template>
@@ -16,6 +46,18 @@ export default {
     name: 'Header',
     components: {
         Search
+    },
+    data: function() {
+        return {
+            menu: [
+                'Home',
+                'Serie Tv',
+                'Film',
+                'Originali',
+                'Aggiunti di recente',
+                'La mia lista'
+            ]
+        }
     },
     methods: {
         titleSearched: function(val) {
@@ -39,15 +81,53 @@ export default {
         z-index: 1;
 
         nav {
-            padding: 20px 30px;
+            padding: 20px 50px;
 
-            a {
-                img {
-                    width: 150px;
-                    transition: filter .3s;
+            .navbar_left {
+                a {
+                    img {
+                        width: 150px;
+                        margin-right: 50px;
+                        transition: filter .3s;
 
-                    &:hover {
-                        filter: brightness(180%);
+                        &:hover {
+                            filter: brightness(180%);
+                        }
+                    }
+                }
+
+                ul {
+                    li {
+                        margin-right: 20px;
+
+                        a {
+                            color: $nav-link;
+                            cursor: pointer;
+                            transition: color .3s linear;
+
+                            &:hover {
+                                color: $base-color;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .navbar_right {
+                ul {
+                    li {
+                        margin-left: 20px;
+                        color: $nav-link;
+                        transition: color .3s linear;
+
+                        &:hover {
+                            color: $base-color;
+                        }
+
+                        .netflix_profile {
+                            width: 40px;
+                            margin-right: 5px;
+                        }
                     }
                 }
             }

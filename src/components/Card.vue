@@ -27,6 +27,10 @@
                     <i v-for="number,index in 5" :key="index" :class="enterStar(index, vote)" class="fa-star"></i>
                 </span>
             </li>
+            <li>
+                <strong>Trama</strong>: 
+                {{ plot }}
+            </li>
         </ul>
     </a>
 </template>
@@ -58,6 +62,9 @@ export default {
         },
         vote: function() {
             return ((this.movie.vote_average * 5) / 10).toFixed(0);
+        },
+        plot: function() {
+            return this.movie.overview;
         }
     },
     methods: {
@@ -87,13 +94,12 @@ export default {
 
     .movie_card {
         position: relative;
-        width: calc((100% / 5) - 40px);
-        height: 328.8px;
-        padding: 30px 15px 50px 15px;
-        border: 1px solid lighten($bg-color, 20%);
-        margin: 20px;
-        background-color: $bg-color;
+        width: calc((100% / 5) - 10px);
+        height: 370.8px;
+        border: 1px solid $bg-color;
+        margin: 20px 5px;
         transition: border .3s linear;
+        overflow: hidden;
 
         .poster {
             display: block;
@@ -101,25 +107,32 @@ export default {
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
             text-align: center;
             background-color: $bg-color;
             transition: opacity .3s linear;
         }
 
-        &:hover {
-            border: 1px solid $base-color;
+        &:hover > .poster {
+            z-index: -1;
         }
 
-        &:hover > .poster {
-            opacity: 0;
+        &:hover > ul {
+            overflow: auto;
+            opacity: 1;
         }
 
         ul {
+            width: 100%;
+            height: 100%;
+            padding: 20px 10px;
             color: darken($base-color, 40%);
+            background-color: $movie-info;
+            overflow: hidden;
+            opacity: 0;
+            transition: opacity .3s;
 
             li {
-                line-height: 1.13;
+                line-height: 1.15;
 
                 &:not(:last-child) {
                     margin-bottom: 15px;
@@ -147,6 +160,23 @@ export default {
                     }
                 }
             }
+        }
+    }
+
+    // MEDIA QUERIES
+    @media screen and (max-width: 1399px) {
+        .movie_card {
+            height: 316.8px;
+        }
+    }
+    @media screen and (max-width: 1199px) {
+        .movie_card {
+            height: 254.5px;
+        }
+    }
+    @media screen and (max-width: 991px) {
+        .movie_card {
+            height: 187.2px;
         }
     }
 </style>

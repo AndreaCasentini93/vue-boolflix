@@ -1,12 +1,12 @@
 <template>
     <form class="d-flex align-items-center">
         <div>
+            <input type="text" placeholder="Inserisci titolo" v-model.trim="titleSearched" @keyup="capitalizeFirstLetter">
+        </div>
+        <div>
             <button type="submit" @click.prevent="sendSearch" @keyup.prevent="sendSearch">
                 <i class="fas fa-search"></i>
             </button>
-        </div>
-        <div>
-            <input type="text" placeholder="Inserisci titolo" v-model.trim="titleSearched" @keyup="capitalizeFirstLetter">
         </div>
     </form>
 </template>
@@ -44,22 +44,22 @@ export default {
         div {
             margin-left: 20px;
 
+            input {
+                min-width: 150px;
+                padding: 3px 10px;
+                border: unset;
+                border-radius: 5px;
+            }
+
             button {
                 border: unset;
-                color: darken($base-color, 50%);
+                color: $nav-link;
                 background-color: unset;
                 transition: color .3s linear;
 
                 &:hover {
                     color: $base-color;
                 }
-            }
-
-            input {
-                min-width: 150px;
-                padding: 3px 10px;
-                border: unset;
-                border-radius: 5px;
             }
         }
     }
