@@ -1,0 +1,15 @@
+@import './variables.scss';
+
+@mixin home-message($font-min, $font-max) {
+    height: 100%;
+    font-size: $font-min;
+    font-weight: 700;
+    color: $base-color;
+
+    div {
+        margin-bottom: 10px;
+        text-transform: uppercase;
+        font-size: $font-max;
+        color: $logo-color;
+    }
+}

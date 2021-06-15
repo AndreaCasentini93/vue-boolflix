@@ -98,7 +98,7 @@ export default {
         height: 513px;
         border: 1px solid $bg-color;
         margin: 5px;
-        background-color: black;
+        background-color: $shadow-color;
         transition: border .3s linear;
         overflow: hidden;
 

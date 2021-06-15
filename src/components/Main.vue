@@ -3,7 +3,8 @@
         <section v-if="movies.length != 0" class="cards_box d-flex justify-content-center flex-wrap">
             <Card v-for="movie in movies" :key="movie.id" :movieDetails="movie"/>
         </section>
-        <section v-else class="not-found d-flex justify-content-center align-items-center">Nessun risultato trovato</section>
+        <section v-else-if="!homeLayout" class="not_found d-flex flex-column justify-content-center align-items-center"><div>Siamo spiacenti...</div>Nessun risultato trovato</section>
+        <section v-else class="home_layout d-flex flex-column justify-content-center align-items-center text-center"><div>Benvenuto!</div>Inizia la tua ricerca</section>
     </main>
 </template>
 
@@ -16,11 +17,15 @@ export default {
         Card
     },
     props: {
-        searchArray: Array
+        searchArray: Array,
+        home: Boolean
     },
     computed: {
         movies: function() {
             return this.searchArray;
+        },
+        homeLayout: function() {
+            return this.home;
         }
     }
 }
@@ -33,15 +38,23 @@ export default {
     main {
         height: 100vh;
         padding-top: 90px;
-        padding-right: 10px;
-        padding-left: 10px;
 
-        .not-found {
-            height: 100%;
-            text-transform: uppercase;
-            font-size: 50px;
-            font-weight: 700;
-            color: $base-color;
+        .cards_box {
+            padding-right: 10px;
+            padding-left: 10px;
+        }
+
+        .not_found {
+            @include home-message(50px, 60px);
+        }
+
+        .home_layout {
+            @include home-message(90px, 100px);
+            padding: 0 20px;
+            background: url('../assets/images/start-bg.png');
+            background-size: cover;
+            background-position: center;
+            text-shadow: 5px 5px 8px $shadow-color;
         }
     }
 </style>

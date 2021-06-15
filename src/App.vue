@@ -6,7 +6,7 @@
       <!-- /HEADER -->
 
       <!-- MAIN -->
-      <Main :searchArray="movies"/>
+      <Main :searchArray="movies" :home="homeLayout"/>
       <!-- /MAIN -->
     </template>
 
@@ -44,7 +44,8 @@ export default {
       title: '',
       movies: [],
       loading: false,
-      callAxios: false
+      callAxios: false,
+      homeLayout: true
     }
   },
   methods: {
@@ -59,6 +60,7 @@ export default {
           }
         })
         .then (response => {
+          this.homeLayout = false;
           this.loading = true;
           this.movies = [];
           this.movies = response.data.results;
