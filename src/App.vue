@@ -41,14 +41,14 @@ export default {
         apiKey: 'cb304e29663a7b9973c26a03b4532795',
         apiLanguage: 'it-IT'
       },
-      title: 'a',
+      title: '',
       movies: [],
-      loading: true
+      loading: false,
+      callAxios: false
     }
   },
   methods: {
     titleSearched: function(val) {
-      this.loading = true;
       this.title = val;
       axios
         .get(this.moviesApi.apiUrl, {
@@ -59,49 +59,31 @@ export default {
           }
         })
         .then (response => {
+          this.loading = true;
+          this.movies = [];
           this.movies = response.data.results;
+          this.movies = this.movies.sort(function(a, b){return b.vote_average-a.vote_average});
+          this.callAxios = true;
+          if (this.callAxios == true) {
+            axios
+              .get(this.tvSeriesApi.apiUrl, {
+                params: {
+                  api_key: this.tvSeriesApi.apiKey,
+                  language: this.tvSeriesApi.apiLanguage,
+                  query: this.title
+                }
+              })
+              .then (response => {
+                this.callAxios = false;
+                this.movies = [...this.movies, ...response.data.results];
+                this.movies = this.movies.sort(function(a, b){return b.vote_average-a.vote_average});
+                this.loading = false;
+              })
+              .catch()
+          }
         })
         .catch()
-        axios
-          .get(this.tvSeriesApi.apiUrl, {
-            params: {
-              api_key: this.tvSeriesApi.apiKey,
-              language: this.tvSeriesApi.apiLanguage,
-              query: this.title
-            }
-          })
-          .then (response => {
-            this.movies = [...this.movies, ...response.data.results].sort();
-            this.loading = false;
-          })
-          .catch()
     }
-  },
-  created: function() {
-    axios
-      .get(this.moviesApi.apiUrl, {
-        params: {
-          api_key: this.moviesApi.apiKey,
-          language: this.moviesApi.apiLanguage,
-          query: this.title
-        }
-      })
-      .then (response => {
-        this.movies = response.data.results;
-      })
-    axios
-      .get(this.tvSeriesApi.apiUrl, {
-        params: {
-          api_key: this.tvSeriesApi.apiKey,
-          language: this.tvSeriesApi.apiLanguage,
-          query: this.title
-        }
-      })
-      .then (response => {
-        this.movies = [...this.movies, ...response.data.results].sort();
-        this.loading = false;
-      })
-      .catch()
   }
 }
 </script>

@@ -1,7 +1,7 @@
 <template>
     <main>
         <section v-if="movies.length != 0" class="cards_box d-flex justify-content-center flex-wrap">
-            <Card v-for="movie, index in movies" :key="index" :movieDetails="movie"/>
+            <Card v-for="movie in movies" :key="movie.id" :movieDetails="movie"/>
         </section>
         <section v-else class="not-found d-flex justify-content-center align-items-center">Nessun risultato trovato</section>
     </main>

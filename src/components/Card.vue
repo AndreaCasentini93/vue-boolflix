@@ -102,6 +102,10 @@ export default {
         transition: border .3s linear;
         overflow: hidden;
 
+        &:hover {
+            background-color: unset;
+        }
+
         .poster {
             display: block;
             position: absolute;
@@ -114,11 +118,6 @@ export default {
 
         &:hover > .poster {
             z-index: -1;
-        }
-
-        &:hover > ul {
-            overflow: auto;
-            opacity: 1;
         }
 
         ul {
@@ -160,6 +159,11 @@ export default {
                     }
                 }
             }
+        }
+
+        &:hover > ul {
+            overflow: auto;
+            opacity: 1;
         }
     }
 
