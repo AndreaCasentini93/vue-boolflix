@@ -3,7 +3,7 @@
         <img 
             class="poster"
             :src="'https://image.tmdb.org/t/p/w342' + movie.poster_path" 
-            :alt="'Immagine ' + (title? title:name)">
+            :alt="title? title:name">
         <ul>
             <li>
                 <strong>Titolo</strong>: 
@@ -94,10 +94,11 @@ export default {
 
     .movie_card {
         position: relative;
-        width: calc((100% / 5) - 10px);
-        height: 370.8px;
+        width: 342px;
+        height: 513px;
         border: 1px solid $bg-color;
-        margin: 20px 5px;
+        margin: 5px;
+        background-color: black;
         transition: border .3s linear;
         overflow: hidden;
 
@@ -106,7 +107,6 @@ export default {
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
             text-align: center;
             background-color: $bg-color;
             transition: opacity .3s linear;
@@ -163,20 +163,4 @@ export default {
         }
     }
 
-    // MEDIA QUERIES
-    @media screen and (max-width: 1399px) {
-        .movie_card {
-            height: 316.8px;
-        }
-    }
-    @media screen and (max-width: 1199px) {
-        .movie_card {
-            height: 254.5px;
-        }
-    }
-    @media screen and (max-width: 991px) {
-        .movie_card {
-            height: 187.2px;
-        }
-    }
 </style>
