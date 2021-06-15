@@ -109,8 +109,9 @@ export default {
         .poster {
             display: block;
             position: absolute;
-            top: 0;
+            top: 50%;
             left: 0;
+            transform: translateY(-50%);
             text-align: center;
             background-color: $bg-color;
             transition: opacity .3s linear;

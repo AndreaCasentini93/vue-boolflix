@@ -125,7 +125,7 @@ export default {
                         }
 
                         .netflix_profile {
-                            width: 40px;
+                            width: 35px;
                             margin-right: 5px;
                         }
                     }
