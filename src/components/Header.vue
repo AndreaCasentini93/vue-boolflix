@@ -52,10 +52,7 @@ export default {
             menu: [
                 'Home',
                 'Serie Tv',
-                'Film',
-                'Originali',
-                'Aggiunti di recente',
-                'La mia lista'
+                'Film'
             ]
         }
     },
