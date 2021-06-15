@@ -124,9 +124,16 @@ export default {
                             color: $base-color;
                         }
 
-                        .netflix_profile {
-                            width: 35px;
-                            margin-right: 5px;
+                        a {
+                            &:hover > .netflix_profile {
+                            filter: brightness(150%);
+                        }
+
+                            .netflix_profile {
+                                width: 35px;
+                                margin-right: 5px;
+                                transition: filter .3s linear;
+                            }
                         }
                     }
                 }
