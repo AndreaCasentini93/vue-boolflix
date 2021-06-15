@@ -20,14 +20,14 @@
                     :src="selectImgSrc(language)" 
                     :alt="selectImgAlt(language)">
                 <template v-else>{{ language.toUpperCase() }}</template>
-            </li>
-            <li class="d-flex">
-                <strong>Voto</strong>: 
+            </li> 
+            <li v-if="vote > 0" class="d-flex">
+                <strong>Voto</strong>:
                 <span class="d-flex justify-content-between">
                     <i v-for="number,index in 5" :key="index" :class="enterStar(index, vote)" class="fa-star"></i>
                 </span>
             </li>
-            <li>
+            <li v-if="plot">
                 <strong>Trama</strong>: 
                 {{ plot }}
             </li>
