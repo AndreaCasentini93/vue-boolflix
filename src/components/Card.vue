@@ -1,5 +1,5 @@
 <template>
-    <a href="#" class="movie_card">
+    <a v-if="movie.poster_path" href="#" class="movie_card">
         <img 
             class="poster"
             :src="'https://image.tmdb.org/t/p/w342' + movie.poster_path" 

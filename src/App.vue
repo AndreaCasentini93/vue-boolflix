@@ -62,7 +62,7 @@ export default {
           this.loading = true;
           this.movies = [];
           this.movies = response.data.results;
-          this.movies = this.movies.sort(function(a, b){return b.vote_average-a.vote_average});
+          this.movies = this.movies.sort(function(a, b){return b.popularity-a.popularity});
           this.callAxios = true;
           if (this.callAxios == true) {
             axios
@@ -76,7 +76,7 @@ export default {
               .then (response => {
                 this.callAxios = false;
                 this.movies = [...this.movies, ...response.data.results];
-                this.movies = this.movies.sort(function(a, b){return b.vote_average-a.vote_average});
+                this.movies = this.movies.sort(function(a, b){return b.popularity-a.popularity});
                 this.loading = false;
               })
               .catch()
