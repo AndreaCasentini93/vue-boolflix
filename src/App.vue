@@ -44,7 +44,6 @@ export default {
       title: '',
       movies: [],
       loading: false,
-      callAxios: false,
       homeLayout: true
     }
   },
@@ -65,24 +64,20 @@ export default {
           this.movies = [];
           this.movies = response.data.results;
           this.movies = this.movies.sort(function(a, b){return b.popularity-a.popularity});
-          this.callAxios = true;
-          if (this.callAxios == true) {
-            axios
-              .get(this.tvSeriesApi.apiUrl, {
-                params: {
-                  api_key: this.tvSeriesApi.apiKey,
-                  language: this.tvSeriesApi.apiLanguage,
-                  query: this.title
-                }
-              })
-              .then (response => {
-                this.callAxios = false;
-                this.movies = [...this.movies, ...response.data.results];
-                this.movies = this.movies.sort(function(a, b){return b.popularity-a.popularity});
-                this.loading = false;
-              })
-              .catch()
-          }
+          axios
+            .get(this.tvSeriesApi.apiUrl, {
+              params: {
+                api_key: this.tvSeriesApi.apiKey,
+                language: this.tvSeriesApi.apiLanguage,
+                query: this.title
+              }
+            })
+            .then (response => {
+              this.movies = [...this.movies, ...response.data.results];
+              this.movies = this.movies.sort(function(a, b){return b.popularity-a.popularity});
+              this.loading = false;
+            })
+            .catch()
         })
         .catch()
     }
