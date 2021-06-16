@@ -69,7 +69,8 @@ export default {
       this.homeLayout = false;
       this.moviesArray = [];
       this.tvSeriesArray = [];
-      // 1° Axios Call
+      
+      // 1° Chiamata API
       axios
         .get(this.moviesApi.apiUrl, {
           params: {
@@ -83,34 +84,33 @@ export default {
           if (this.moviesArray.length == 0) {
             this.moviesFound = false;
           }
-          // this.movies.forEach(movie => {
-          //   movie = {...movie, cast: []};
-          //   // 2° Axios Call
-          //   axios
-          //     .get('https://api.themoviedb.org/3/movie/' + movie.id + '/credits', {
-          //       params: {
-          //         api_key: this.moviesApi.apiKey,
-          //         language: this.moviesApi.apiLanguage,
-          //       }
-          //     })
-          //     .then (response => {
-          //       for (let i = 0; i < 5; i++) {
-          //         if (response.data.cast[i].name) {
-          //           movie.cast.push(response.data.cast[i].name);
-          //         }
-          //       }
-          //       console.log(movie);
-          //       console.log(movie.title);
-          //       console.log('--------------------------------------------------------------------------');
-          //     })
-          //     .catch(err => {
-          //        console.log('Errore: ', err);
-          //      })
-          // });
+
+          // Chiamata API per attori di film
+          this.moviesArray.forEach(movie => {
+            movie = {...movie, cast: []};
+            axios
+              .get('https://api.themoviedb.org/3/movie/' + movie.id + '/credits', {
+                params: {
+                  api_key: this.moviesApi.apiKey,
+                  language: this.moviesApi.apiLanguage,
+                }
+              })
+              .then (response => {
+                for (let i = 0; i < response.data.cast.length && i < 5; i++) {
+                  movie.cast.push(response.data.cast[i].name);
+                }
+              })
+              .catch(err => {
+                 console.log('Errore: ', err);
+               })
+          });
+
         })
         .catch(err => {
           console.log('Errore: ', err);
         })
+      
+      // 2° Chiamata API
       axios
         .get(this.tvSeriesApi.apiUrl, {
           params: {
@@ -124,6 +124,27 @@ export default {
           if (this.tvSeriesArray.length == 0) {
             this.tvSeriesFound = false;
           }
+
+          // Chiamata API per attori di serie TV
+          this.tvSeriesArray.forEach(tvSerie => {
+            tvSerie = {...tvSerie, cast: []};
+            axios
+              .get('https://api.themoviedb.org/3/tv/' + tvSerie.id + '/credits', {
+                params: {
+                  api_key: this.tvSeriesApi.apiKey,
+                  language: this.tvSeriesApi.apiLanguage,
+                }
+              })
+              .then (response => {
+                for (let i = 0; i < response.data.cast.length && i < 5; i++) {
+                  tvSerie.cast.push(response.data.cast[i].name);
+                }
+              })
+              .catch(err => {
+                 console.log('Errore: ', err);
+               })
+          });
+          
         })
         .catch(err => {
           console.log('Errore: ', err);
