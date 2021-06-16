@@ -29,7 +29,7 @@
             </li>
             <li>
                 <strong>Cast</strong>: 
-                {{ cast  }}
+                {{ castList() }}
             </li>
             <li v-if="plot">
                 <strong>Trama</strong>: 
@@ -102,6 +102,17 @@ export default {
             } else {
                 return 'far';
             }
+        },
+        castList: function() {
+            let castString = '';
+            this.cast.forEach(element => {
+                if (castString == '') {
+                    castString = element;
+                } else {
+                    castString += ', ' + element;
+                }
+            });
+            return castString
         }
     }
 }
