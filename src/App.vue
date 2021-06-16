@@ -87,7 +87,7 @@ export default {
             this.moviesFound = false;
           }
 
-          // Chiamata API per attori  film
+          // Chiamata API per attori film
           let newMoviesArray = this.moviesArray;
           this.moviesArray = []
           newMoviesArray.forEach(movie => {
@@ -104,13 +104,37 @@ export default {
                   movie.cast.push(response.data.cast[i].name);
                 }
                 this.moviesArray.push(movie);
+                if (this.moviesArray.length == newMoviesArray.length) {
+                  
+                  // Chiamata API per genere film
+                  let newMoviesArray2 = this.moviesArray;
+                  this.moviesArray = []
+                  newMoviesArray2.forEach(movie => {
+                    movie = {...movie, genres: []};
+                    axios
+                      .get('https://api.themoviedb.org/3/movie/' + movie.id, {
+                        params: {
+                          api_key: this.moviesApi.apiKey,
+                          language: this.moviesApi.apiLanguage,
+                        }
+                      })
+                      .then (response => {
+                        for (let i = 0; i < response.data.genres.length; i++) {
+                          movie.genres.push(response.data.genres[i].name);
+                        }
+                        this.moviesArray.push(movie);
+                      })
+                      .catch(err => {
+                        console.log('Errore: ', err);
+                      })
+                  });
+
+                }
               })
               .catch(err => {
                  console.log('Errore: ', err);
                })
           });
-
-          // Chiamata API per genere film
 
         })
         .catch(err => {
@@ -149,6 +173,32 @@ export default {
                   tvSerie.cast.push(response.data.cast[i].name);
                 }
                 this.tvSeriesArray.push(tvSerie);
+                if (this.tvSeriesArray.length == newTvSeriesArray.length) {
+
+                  // Chiamata API per genere film
+                  let newTvSeriesArray2 = this.tvSeriesArray;
+                  this.tvSeriesArray = []
+                  newTvSeriesArray2.forEach(movie => {
+                    movie = {...movie, genres: []};
+                    axios
+                      .get('https://api.themoviedb.org/3/tv/' + movie.id, {
+                        params: {
+                          api_key: this.moviesApi.apiKey,
+                          language: this.moviesApi.apiLanguage,
+                        }
+                      })
+                      .then (response => {
+                        for (let i = 0; i < response.data.genres.length; i++) {
+                          movie.genres.push(response.data.genres[i].name);
+                        }
+                        this.tvSeriesArray.push(movie);
+                      })
+                      .catch(err => {
+                        console.log('Errore: ', err);
+                      })
+                  });
+
+                }
               })
               .catch(err => {
                  console.log('Errore: ', err);
