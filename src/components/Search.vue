@@ -1,12 +1,12 @@
 <template>
     <form class="d-flex align-items-center">
         <div>
-            <input type="text" placeholder="Inserisci titolo" v-model.trim="titleSearched" @keyup="capitalizeFirstLetter">
-        </div>
-        <div>
             <button type="submit" @click.prevent="sendSearch" @keyup.prevent="sendSearch">
                 <i class="fas fa-search"></i>
             </button>
+        </div>
+        <div>
+            <input type="text" placeholder="Inserisci titolo" v-model.trim="titleSearched" @keyup="capitalizeFirstLetter">
         </div>
     </form>
 </template>
@@ -42,7 +42,7 @@ export default {
 
     form {
         div {
-            margin-left: 20px;
+            margin-left: 15px;
 
             input {
                 min-width: 150px;

@@ -19,9 +19,6 @@
                 <Search @search="titleSearched"/>
                 <ul class="d-flex align-items-center">
                     <li>
-                        <a href="#" class="uppercase">BAMBINI</a>
-                    </li>
-                    <li>
                         <a href="#">
                             <i class="fas fa-bell"></i>
                         </a>
@@ -95,7 +92,7 @@ export default {
 
                 ul {
                     li {
-                        margin-right: 20px;
+                        margin-right: 30px;
 
                         a {
                             color: $nav-link;
@@ -113,7 +110,7 @@ export default {
             .navbar_right {
                 ul {
                     li {
-                        margin-left: 20px;
+                        margin-left: 30px;
                         color: $nav-link;
                         transition: color .3s linear;
 

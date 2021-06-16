@@ -33,3 +33,20 @@ a {
         color: unset;
     }
 }
+
+::-webkit-scrollbar {
+    width: 18px;
+}
+::-webkit-scrollbar-track {
+    background: lighten($bg-color, 25%);
+    box-shadow: inset 0 0 5px 3px $shadow-color;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background: $logo-color;
+    box-shadow: inset 0 0 5px 3px $shadow-color;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: $base-color; 
+    box-shadow: inset 0 0 5px 3px $shadow-color;
+}
