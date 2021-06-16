@@ -42,7 +42,7 @@ export default {
 
     form {
         div {
-            margin-left: 15px;
+            margin-left: 20px;
 
             input {
                 min-width: 150px;
