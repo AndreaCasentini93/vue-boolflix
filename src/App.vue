@@ -87,8 +87,10 @@ export default {
             this.moviesFound = false;
           }
 
-          // Chiamata API per attori di film
-          this.moviesArray.forEach(movie => {
+          // Chiamata API per attori  film
+          let newMoviesArray = this.moviesArray;
+          this.moviesArray = []
+          newMoviesArray.forEach(movie => {
             movie = {...movie, cast: []};
             axios
               .get('https://api.themoviedb.org/3/movie/' + movie.id + '/credits', {
@@ -101,11 +103,14 @@ export default {
                 for (let i = 0; i < response.data.cast.length && i < 5; i++) {
                   movie.cast.push(response.data.cast[i].name);
                 }
+                this.moviesArray.push(movie);
               })
               .catch(err => {
                  console.log('Errore: ', err);
                })
           });
+
+          // Chiamata API per genere film
 
         })
         .catch(err => {
@@ -127,8 +132,10 @@ export default {
             this.tvSeriesFound = false;
           }
 
-          // Chiamata API per attori di serie TV
-          this.tvSeriesArray.forEach(tvSerie => {
+          // Chiamata API per attori serie TV
+          let newTvSeriesArray = this.tvSeriesArray;
+          this.tvSeriesArray = []
+          newTvSeriesArray.forEach(tvSerie => {
             tvSerie = {...tvSerie, cast: []};
             axios
               .get('https://api.themoviedb.org/3/tv/' + tvSerie.id + '/credits', {
@@ -141,12 +148,15 @@ export default {
                 for (let i = 0; i < response.data.cast.length && i < 5; i++) {
                   tvSerie.cast.push(response.data.cast[i].name);
                 }
+                this.tvSeriesArray.push(tvSerie);
               })
               .catch(err => {
                  console.log('Errore: ', err);
                })
           });
           
+          // Chiamata API per genere serie TV
+
         })
         .catch(err => {
           console.log('Errore: ', err);

@@ -27,6 +27,10 @@
                     <i v-for="number,index in 5" :key="index" :class="enterStar(index, vote)" class="fa-star"></i>
                 </span>
             </li>
+            <li>
+                <strong>Cast</strong>: 
+                {{ cast  }}
+            </li>
             <li v-if="plot">
                 <strong>Trama</strong>: 
                 {{ plot }}
@@ -70,6 +74,9 @@ export default {
         },
         vote: function() {
             return ((this.movie.vote_average * 5) / 10).toFixed(0);
+        },
+        cast: function() {
+            return this.movie.cast;
         },
         plot: function() {
             return this.movie.overview;
