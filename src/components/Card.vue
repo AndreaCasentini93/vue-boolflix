@@ -31,6 +31,10 @@
                 <strong>Cast</strong>: 
                 {{ castList() }}
             </li>
+            <li v-if="genresList() != ''">
+                <strong>Genere</strong>: 
+                {{ genresList() }}
+            </li>
             <li v-if="plot">
                 <strong>Trama</strong>: 
                 {{ plot }}
@@ -78,6 +82,9 @@ export default {
         cast: function() {
             return this.movie.cast;
         },
+        genres: function() {
+            return this.movie.genres;
+        },
         plot: function() {
             return this.movie.overview;
         }
@@ -113,6 +120,17 @@ export default {
                 }
             });
             return castString
+        },
+        genresList: function() {
+            let genresString = '';
+            this.genres.forEach(element => {
+                if (genresString == '') {
+                    genresString = element;
+                } else {
+                    genresString += ', ' + element;
+                }
+            });
+            return genresString
         }
     }
 }
