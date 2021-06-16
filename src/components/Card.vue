@@ -27,7 +27,7 @@
                     <i v-for="number,index in 5" :key="index" :class="enterStar(index, vote)" class="fa-star"></i>
                 </span>
             </li>
-            <li>
+            <li v-if="castList() != ''">
                 <strong>Cast</strong>: 
                 {{ castList() }}
             </li>
