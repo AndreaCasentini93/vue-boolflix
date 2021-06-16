@@ -69,6 +69,8 @@ export default {
       this.homeLayout = false;
       this.moviesArray = [];
       this.tvSeriesArray = [];
+      this.moviesFound = true;
+      this.tvSeriesFound = true;
       
       // 1° Chiamata API
       axios
