@@ -42,16 +42,33 @@ export default {
         apiLanguage: 'it-IT'
       },
       title: '',
-      movies: [],
       moviesArray: [],
       tvSeriesArray: [],
-      loading: false,
-      homeLayout: true
+      homeLayout: true,
+      moviesFound: true,
+      tvSeriesFound: true
+    }
+  },
+  computed: {
+    movies: function() {
+      return [...this.moviesArray, ...this.tvSeriesArray].sort(function(a, b){return b.popularity-a.popularity});
+    },
+    loading: function(){
+      if (this.movies.length == 0 && this.homeLayout) {
+        return false;
+      } else if ((this.moviesArray.length == 0 || this.tvSeriesArray.length == 0) && (this.moviesFound && this.tvSeriesFound)) {
+        return true;
+      } else {
+        return false
+      }
     }
   },
   methods: {
     titleSearched: function(val) {
       this.title = val;
+      this.homeLayout = false;
+      this.moviesArray = [];
+      this.tvSeriesArray = [];
       // 1° Axios Call
       axios
         .get(this.moviesApi.apiUrl, {
@@ -62,13 +79,10 @@ export default {
           }
         })
         .then (response => {
-          this.loading = true;
-          this.homeLayout = false;
-          this.moviesArray = [];
           this.moviesArray = response.data.results;
-          this.movies = [...this.moviesArray, ...this.tvSeriesArray];
-          this.movies = this.movies.sort(function(a, b){return b.popularity-a.popularity});
-          this.loading = false;
+          if (this.moviesArray.length == 0) {
+            this.moviesFound = false;
+          }
           // this.movies.forEach(movie => {
           //   movie = {...movie, cast: []};
           //   // 2° Axios Call
@@ -106,13 +120,10 @@ export default {
           }
         })
         .then (response => {
-          this.loading = true;
-          this.homeLayout = false;
-          this.tvSeriesArray = [];
           this.tvSeriesArray = response.data.results;
-          this.movies = [...this.moviesArray, ...this.tvSeriesArray];
-          this.movies = this.movies.sort(function(a, b){return b.popularity-a.popularity});
-          this.loading = false;
+          if (this.tvSeriesArray.length == 0) {
+            this.tvSeriesFound = false;
+          }
         })
         .catch(err => {
           console.log('Errore: ', err);
