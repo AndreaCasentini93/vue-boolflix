@@ -43,6 +43,8 @@ export default {
       },
       title: '',
       movies: [],
+      moviesArray: [],
+      tvSeriesArray: [],
       loading: false,
       homeLayout: true
     }
@@ -50,6 +52,7 @@ export default {
   methods: {
     titleSearched: function(val) {
       this.title = val;
+      // 1° Axios Call
       axios
         .get(this.moviesApi.apiUrl, {
           params: {
@@ -59,27 +62,61 @@ export default {
           }
         })
         .then (response => {
-          this.homeLayout = false;
           this.loading = true;
-          this.movies = [];
-          this.movies = response.data.results;
+          this.homeLayout = false;
+          this.moviesArray = [];
+          this.moviesArray = response.data.results;
+          this.movies = [...this.moviesArray, ...this.tvSeriesArray];
           this.movies = this.movies.sort(function(a, b){return b.popularity-a.popularity});
-          axios
-            .get(this.tvSeriesApi.apiUrl, {
-              params: {
-                api_key: this.tvSeriesApi.apiKey,
-                language: this.tvSeriesApi.apiLanguage,
-                query: this.title
-              }
-            })
-            .then (response => {
-              this.movies = [...this.movies, ...response.data.results];
-              this.movies = this.movies.sort(function(a, b){return b.popularity-a.popularity});
-              this.loading = false;
-            })
-            .catch()
+          this.loading = false;
+          // this.movies.forEach(movie => {
+          //   movie = {...movie, cast: []};
+          //   // 2° Axios Call
+          //   axios
+          //     .get('https://api.themoviedb.org/3/movie/' + movie.id + '/credits', {
+          //       params: {
+          //         api_key: this.moviesApi.apiKey,
+          //         language: this.moviesApi.apiLanguage,
+          //       }
+          //     })
+          //     .then (response => {
+          //       for (let i = 0; i < 5; i++) {
+          //         if (response.data.cast[i].name) {
+          //           movie.cast.push(response.data.cast[i].name);
+          //         }
+          //       }
+          //       console.log(movie);
+          //       console.log(movie.title);
+          //       console.log('--------------------------------------------------------------------------');
+          //     })
+          //     .catch(err => {
+          //        console.log('Errore: ', err);
+          //      })
+          // });
         })
-        .catch()
+        .catch(err => {
+          console.log('Errore: ', err);
+        })
+      axios
+        .get(this.tvSeriesApi.apiUrl, {
+          params: {
+            api_key: this.tvSeriesApi.apiKey,
+            language: this.tvSeriesApi.apiLanguage,
+            query: this.title
+          }
+        })
+        .then (response => {
+          this.loading = true;
+          this.homeLayout = false;
+          this.tvSeriesArray = [];
+          this.tvSeriesArray = response.data.results;
+          this.movies = [...this.moviesArray, ...this.tvSeriesArray];
+          this.movies = this.movies.sort(function(a, b){return b.popularity-a.popularity});
+          this.loading = false;
+        })
+        .catch(err => {
+          console.log('Errore: ', err);
+        })
     }
   }
 }

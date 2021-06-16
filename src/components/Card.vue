@@ -41,6 +41,14 @@ export default {
     props: {
         movieDetails: Object
     },
+    data: function() {
+        return {
+            languagesArray: [
+                'en',
+                'it'
+            ]
+        }
+    },
     computed: {
         movie: function() {
             return this.movieDetails
@@ -72,10 +80,14 @@ export default {
             return language == 'en' || language == 'it';
         },
         selectImgSrc: function(language) {
-            return language == 'en'? require('../assets/images/en.png'):require('../assets/images/it.png');
+            if (this.languagesArray.includes(language)) {
+                return require('../assets/images/' + language + '.png');
+            }
         },
         selectImgAlt: function(language) {
-            return language == 'en'? 'EN':'IT';
+            if (this.languagesArray.includes(language)) {
+                return language;
+            }
         },
         enterStar: function(index, vote) {
             if ((index + 1) <= vote) {
