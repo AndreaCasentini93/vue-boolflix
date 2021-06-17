@@ -17,6 +17,7 @@
             <!-- NAVBAR RIGHT -->
             <div class="navbar_right d-flex align-items-center">
                 <Search @search="titleSearched"/>
+                <SelectGenre />
                 <ul class="d-flex align-items-center">
                     <li>
                         <a href="#">
@@ -38,11 +39,13 @@
 
 <script>
 import Search from './Search.vue';
+import SelectGenre from './SelectGenre.vue';
 
 export default {
     name: 'Header',
     components: {
-        Search
+        Search,
+        SelectGenre
     },
     data: function() {
         return {
