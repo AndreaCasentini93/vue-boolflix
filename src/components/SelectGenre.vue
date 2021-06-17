@@ -29,7 +29,16 @@ export default {
     },
     computed: {
         allGenresArray: function() {
-            return [...this.moviesGenresArray, ...this.tvSeriesGenresArray].sort();
+            let array = [...this.moviesGenresArray, ...this.tvSeriesGenresArray].sort();
+            let newArray = [];
+            if (array.length > this.moviesGenresArray.length && array.length > this.tvSeriesGenresArray.length) {
+                array.forEach (element => {
+                    if (!newArray.includes(element)) {
+                        newArray.push(element);
+                    }
+                })
+            }
+            return newArray;
         }
     },
     methods: {
