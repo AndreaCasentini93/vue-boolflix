@@ -44,6 +44,10 @@ export default {
         div {
             margin-left: 20px;
 
+            &:first-of-type {
+                margin-left: 5px;
+            }
+
             input {
                 width: 200px;
                 height: 35px;

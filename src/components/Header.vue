@@ -97,6 +97,10 @@ export default {
                     li {
                         margin-right: 30px;
 
+                        &:last-of-type {
+                            margin-right: 5px;
+                        }
+
                         a {
                             color: $nav-link;
                             cursor: pointer;
