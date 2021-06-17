@@ -1,9 +1,15 @@
 <template>
-    <a v-if="movie.poster_path && selectForGenres" href="#" class="movie_card">
+    <a v-if="selectForGenres" href="#" class="movie_card">
         <img 
+            v-if="movie.poster_path"
             class="poster"
             :src="'https://image.tmdb.org/t/p/w342' + movie.poster_path" 
             :alt="title? title:name">
+        <img
+            v-else
+            class="alternative-poster" 
+            src="../assets/images/logo-boolflix.png" 
+            alt="Logo Boolflix">
         <ul>
             <li>
                 <strong>Titolo</strong>: 
@@ -179,6 +185,21 @@ export default {
         }
 
         &:hover > .poster {
+            z-index: -1;
+        }
+
+        .alternative-poster {
+            display: block;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            background-color: unset;
+            transition: opacity .3s linear;
+        }
+
+        &:hover > .alternative-poster {
             z-index: -1;
         }
 
