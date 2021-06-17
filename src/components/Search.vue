@@ -23,6 +23,7 @@ export default {
         }
     },
     computed: {
+        // Se non è stato selezionato nessun genere, verrà restituita una stringa vuota
         genre: function() {
             if (this.selectedGenre == '') {
                 return '';
@@ -32,11 +33,13 @@ export default {
         }
     },
     methods: {
+        // Rende la prima lettera inserita nel campo di ricerca maiuscola
         capitalizeFirstLetter: function() {
             if (this.titleSearched.length == 1) {
                  this.titleSearched = this.titleSearched.toUpperCase();
             }
         },
+        // Passa all'Header il titolo cercato, svuota il campo di ricerca e resetta il filtro per generi
         sendSearch: function() {
             if (this.titleSearched.length != 0) {
                 this.$emit('search', this.titleSearched.toLowerCase());

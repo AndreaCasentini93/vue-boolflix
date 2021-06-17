@@ -1,5 +1,6 @@
 <template>
     <a v-if="selectForGenres" href="#" class="movie_card">
+        <!-- CARD IMAGE -->
         <img 
             v-if="movie.poster_path"
             class="poster"
@@ -10,6 +11,9 @@
             class="alternative-poster" 
             src="../assets/images/logo-boolflix.png" 
             alt="Logo Boolflix">
+        <!-- /CARD IMAGE -->
+
+        <!-- CARD INFO -->
         <ul>
             <li>
                 <strong>Titolo</strong>: 
@@ -46,6 +50,7 @@
                 {{ plot }}
             </li>
         </ul>
+        <!-- /CARD INFO -->
     </a>
 </template>
 
@@ -84,7 +89,7 @@ export default {
             return this.movie.original_language;
         },
         vote: function() {
-            return ((this.movie.vote_average * 5) / 10).toFixed(0);
+            return ((this.movie.vote_average) / 2).toFixed(0);
         },
         cast: function() {
             return this.movie.cast;
@@ -98,6 +103,7 @@ export default {
         selectedGenre: function() {
             return this.changeGenre;
         },
+        // La card comparirà se non sono stati selezionati generi, o se il genere selezionato fa parte della card
         selectForGenres: function() {
             if (this.selectedGenre == 'Seleziona Genere' || this.selectedGenre == '' || this.genres.includes(this.selectedGenre)) {
                 return true;
@@ -107,19 +113,23 @@ export default {
         }
     },
     methods: {
+        // La bandierina comparirà se la lingua è nell'array delle lingue
         selectImgFlag: function(language) {
-            return language == 'en' || language == 'it';
+            return this.languagesArray.includes(language);
         },
+        // Compone la stringa dell'immagine per la bandierina
         selectImgSrc: function(language) {
             if (this.languagesArray.includes(language)) {
                 return require('../assets/images/' + language + '.png');
             }
         },
+        // Se la lingua non è prensente nell'array delle lingue, allora l'ALT sarà un stringa
         selectImgAlt: function(language) {
             if (this.languagesArray.includes(language)) {
                 return language;
             }
         },
+        // Se l'indice della stellina è minore o uguale al voto, la stellina sarà piena
         enterStar: function(index, vote) {
             if ((index + 1) <= vote) {
                 return 'fas';
@@ -127,6 +137,7 @@ export default {
                 return 'far';
             }
         },
+        // Compone la stringa del cast
         castList: function() {
             let castString = '';
             this.cast.forEach(element => {
@@ -138,6 +149,7 @@ export default {
             });
             return castString
         },
+        // Compone la stringa dei generi
         genresList: function() {
             let genresString = '';
             if (this.genres) {

@@ -28,6 +28,7 @@ export default {
         }
     },
     computed: {
+        // Genere un array con tutti i generi esistenti per film e serie TV
         allGenresArray: function() {
             let array = [...this.moviesGenresArray, ...this.tvSeriesGenresArray].sort();
             let newArray = [];
@@ -42,11 +43,13 @@ export default {
         }
     },
     methods: {
+        // Passa all'Header il genere scelto
         changeGenre: function() {
             this.$emit('genreCall', this.selectedGenre);
         }
     },
     created: function() {
+        // Chiamata all'API per ottenere tutti i generi dei film che vengono inseriti in un array
         axios
             .get(this.moviesGenresApi.apiUrl, {
             params: {
@@ -63,6 +66,7 @@ export default {
                 console.log('Errore: ', err);
             })
 
+        // Chiamata all'API per ottenere tutti i generi delle serie TV che vengono inseriti in un array
         axios
             .get(this.tvSeriesGenresApi.apiUrl, {
             params: {

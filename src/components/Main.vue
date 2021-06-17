@@ -1,12 +1,20 @@
 <template>
     <main>
+        <!-- CARDS -->
         <section v-if="movies.length != 0" class="cards_box d-flex justify-content-center flex-wrap">
             <Card v-for="movie, index in movies" :key="index" :movieDetails="movie" :changeGenre="selectedGenre"/>
         </section>
+        <!-- /CARDS -->
+
+        <!-- NOT FOUND -->
         <section v-else-if="!homeLayout" class="not_found d-flex flex-column justify-content-center align-items-center"><div>Siamo spiacenti...</div>Nessun risultato trovato</section>
+        <!-- /NOT FOUND -->
+
+        <!-- HOMEPAGE -->
         <section v-else class="home_layout">
             <h2 class="d-flex flex-column justify-content-center align-items-center text-center"><div>Benvenuto!</div>Inizia la tua ricerca</h2>
         </section>
+        <!-- /HOMEPAGE -->
     </main>
 </template>
 
@@ -24,6 +32,7 @@ export default {
         genreCall: String
     },
     computed: {
+        // Cicla l'array dei film e serie TV per ottenerne uno nuovo contenente solo i titoli con il genere selezionato
         movies: function() {
             let array = [];
             this.searchArray.forEach(element => {
@@ -32,7 +41,6 @@ export default {
                 }
             });
             return array;
-            //return this.searchArray;
         },
         homeLayout: function() {
             return this.home;

@@ -52,12 +52,15 @@ export default {
     }
   },
   computed: {
+    // Compila l'array generale di film e serie televisive ordinando i titoli in ordine di popolarità
     movies: function() {
       return [...this.moviesArray, ...this.tvSeriesArray].sort(function(a, b){return b.popularity-a.popularity});
     },
   },
   methods: {
+    // Effettua più chiamate all'API per recuperare film e serie TV
     titleSearched: function(val) {
+      // Comandi di default
       this.loading = true;
       this.title = val;
       this.homeLayout = false;
@@ -76,17 +79,20 @@ export default {
           }
         })
         .then (response => {
+          // Riempe array dei film
           this.moviesArray = response.data.results;
+          // Se array è vuoto blocca il loading
           if (this.moviesArray.length == 0) {
             this.moviesFound = false;
             this.loading = false;
           }
 
-          // Chiamata API per attori film
+          // Cicla l'array dei film per inserire in ognuno una nuova chiave "cast" con all'interno 5 membri del cast
           let newMoviesArray = this.moviesArray;
           this.moviesArray = []
           newMoviesArray.forEach(movie => {
             movie = {...movie, cast: []};
+            // Chiamata API per attori film
             axios
               .get('https://api.themoviedb.org/3/movie/' + movie.id + '/credits', {
                 params: {
@@ -99,13 +105,15 @@ export default {
                   movie.cast.push(response.data.cast[i].name);
                 }
                 this.moviesArray.push(movie);
+
+                // Solo se l'array dei film si è riempito allora verrà fatta la nuova chiamata all'API
                 if (this.moviesArray.length == newMoviesArray.length) {
-                  
-                  // Chiamata API per genere film
+                  // Cicla l'array dei film per inserire in ognuno una nuova chiave "genres" con i generi corrispondenti
                   let newMoviesArray2 = this.moviesArray;
                   this.moviesArray = []
                   newMoviesArray2.forEach(movie => {
                     movie = {...movie, genres: []};
+                    // Chiamata API per genere film
                     axios
                       .get('https://api.themoviedb.org/3/movie/' + movie.id, {
                         params: {
@@ -118,6 +126,7 @@ export default {
                           movie.genres.push(response.data.genres[i].name);
                         }
                         this.moviesArray.push(movie);
+                        // Quando l'array sarà pieno, allora verrà bloccato il loading
                         if (this.moviesArray.length == newMoviesArray2.length) {
                           this.loading = false;
                         }
@@ -149,17 +158,20 @@ export default {
           }
         })
         .then (response => {
+          // Riempe l'array delle serie TV
           this.tvSeriesArray = response.data.results;
+          // Se array è vuoto blocca il loading
           if (this.tvSeriesArray.length == 0) {
             this.tvSeriesFound = false;
             this.loading = false;
           }
 
-          // Chiamata API per attori serie TV
+          // Cicla l'array delle serie TV per inserire in ognuna una nuova chiave "cast" con all'interno 5 membri del cast
           let newTvSeriesArray = this.tvSeriesArray;
-          this.tvSeriesArray = []
+          this.tvSeriesArray = [];
           newTvSeriesArray.forEach(tvSerie => {
             tvSerie = {...tvSerie, cast: []};
+            // Chiamata API per attori serie TV
             axios
               .get('https://api.themoviedb.org/3/tv/' + tvSerie.id + '/credits', {
                 params: {
@@ -172,13 +184,15 @@ export default {
                   tvSerie.cast.push(response.data.cast[i].name);
                 }
                 this.tvSeriesArray.push(tvSerie);
-                if (this.tvSeriesArray.length == newTvSeriesArray.length) {
 
-                  // Chiamata API per genere film
+                // Solo se l'array delle serie TV si è riempito allora verrà fatta la nuova chiamata all'API
+                if (this.tvSeriesArray.length == newTvSeriesArray.length) {
+                  // Cicla l'array delle serie TV per inserire in ognuna una nuova chiave "genres" con i generi corrispondenti
                   let newTvSeriesArray2 = this.tvSeriesArray;
                   this.tvSeriesArray = []
                   newTvSeriesArray2.forEach(movie => {
                     movie = {...movie, genres: []};
+                    // Chiamata API per genere serie TV
                     axios
                       .get('https://api.themoviedb.org/3/tv/' + movie.id, {
                         params: {
@@ -191,6 +205,7 @@ export default {
                           movie.genres.push(response.data.genres[i].name);
                         }
                         this.tvSeriesArray.push(movie);
+                        // Quando l'array sarà pieno, allora verrà bloccato il loading
                         if (this.tvSeriesArray.length == newTvSeriesArray2.length) {
                           this.loading = false;
                         }
@@ -206,14 +221,12 @@ export default {
                  console.log('Errore: ', err);
                })
           });
-          
-          // Chiamata API per genere serie TV
-
         })
         .catch(err => {
           console.log('Errore: ', err);
         })
     },
+    // Salva il genere selezionato nel dato "selectedGenre"
     genreSelected: function(val) {
       this.selectedGenre = val;
     }
