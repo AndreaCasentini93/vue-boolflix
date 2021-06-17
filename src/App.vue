@@ -11,9 +11,7 @@
     </template>
 
     <!-- LOADING -->
-    <div v-else class="d-flex justify-content-center align-items-center debug">
-      Loading
-    </div>
+    <Loading v-else/>
     <!-- /LOADING -->
   </div>
 </template>
@@ -22,12 +20,14 @@
 import axios from 'axios';
 import Header from './components/Header.vue';
 import Main from './components/Main.vue';
+import Loading from './components/Loading.vue'
 
 export default {
   name: 'App',
   components: {
     Header,
-    Main
+    Main,
+    Loading
   },
   data: function() {
     return {
@@ -223,9 +223,4 @@ export default {
 
 <style lang="scss">
   @import './assets/style/general.scss';
-
-  .debug {
-    height: 100vh;
-    font-size: 50px;
-  }
 </style>
