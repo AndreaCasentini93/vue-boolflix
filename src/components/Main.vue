@@ -25,11 +25,12 @@ export default {
         movies: function() {
             let array = [];
             this.searchArray.forEach(element => {
-                if (element.genres.includes(this.selectedGenre) || this.selectedGenre == '' || this.selectedGenre == 'Seleziona Genere') {
-                    array.push(element)
+                if (this.selectedGenre == '' || this.selectedGenre == 'Seleziona Genere' || element.genres.includes(this.selectedGenre)) {
+                    array.push(element);
                 }
             });
             return array;
+            //return this.searchArray;
         },
         homeLayout: function() {
             return this.home;
