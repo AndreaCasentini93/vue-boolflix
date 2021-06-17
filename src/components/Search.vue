@@ -65,7 +65,7 @@ export default {
 
             input {
                 width: 200px;
-                height: 35px;
+                height: 38px;
                 padding: 3px 10px;
                 border: unset;
                 border-radius: 5px;

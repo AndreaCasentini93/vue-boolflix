@@ -89,7 +89,7 @@ export default {
 
     select {
         width: 200px;
-        height: 35px;
+        height: 38px;
         margin-left: 15px;
         color: $nav-link;
         cursor: pointer;
