@@ -14,9 +14,21 @@
 <script>
 export default {
     name: 'Search',
+    props: {
+        selectedGenre: String
+    },
     data: function() {
         return {
             titleSearched: ''
+        }
+    },
+    computed: {
+        genre: function() {
+            if (this.selectedGenre == '') {
+                return '';
+            } else {
+                return this.selectedGenre;
+            }
         }
     },
     methods: {
@@ -29,6 +41,9 @@ export default {
             if (this.titleSearched.length != 0) {
                 this.$emit('search', this.titleSearched.toLowerCase());
                 this.titleSearched = '';
+                if (this.genre.length > 0) {
+                    this.$emit('select', '')
+                }
             }
         }
     }

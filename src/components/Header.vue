@@ -16,7 +16,7 @@
 
             <!-- NAVBAR RIGHT -->
             <div class="navbar_right d-flex align-items-center">
-                <Search @search="titleSearched"/>
+                <Search @search="titleSearched" @select="selectReset" :selectedGenre="genre"/>
                 <SelectGenre @genreCall="changeGenre"/>
                 <ul class="d-flex align-items-center">
                     <li>
@@ -53,7 +53,8 @@ export default {
                 'Home',
                 'Serie Tv',
                 'Film'
-            ]
+            ],
+            genre: ''
         }
     },
     methods: {
@@ -61,7 +62,12 @@ export default {
             this.$emit('search', val);
         },
         changeGenre: function(val) {
-            this.$emit('select', val);
+            this.genre = val;
+            this.$emit('select', this.genre);
+        },
+        selectReset: function(val) {
+            this.genre = val;
+            this.$emit('select', this.genre);
         }
     }
 }
