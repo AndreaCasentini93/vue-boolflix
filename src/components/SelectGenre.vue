@@ -1,13 +1,70 @@
 <template>
     <select class="form-select" aria-label="Default select example">
         <option selected>Seleziona Genere</option>
-        <option value="Genere1">Genere1</option>
+        <option v-for="genres, index in allGenresArray" :key="index" value="genres">{{ genres }}</option>
     </select>
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
-    name: 'SelectGenre'
+    name: 'SelectGenre',
+    data: function() {
+        return {
+            moviesGenresApi: {
+                apiUrl: 'https://api.themoviedb.org/3/genre/movie/list',
+                apiKey: 'cb304e29663a7b9973c26a03b4532795',
+                apiLanguage: 'it-IT'
+            },
+            tvSeriesGenresApi: {
+                apiUrl: 'https://api.themoviedb.org/3/genre/tv/list',
+                apiKey: 'cb304e29663a7b9973c26a03b4532795',
+                apiLanguage: 'it-IT'
+            },
+            moviesGenresArray: [],
+            tvSeriesGenresArray: []
+        }
+    },
+    computed: {
+        allGenresArray: function() {
+            return [...this.moviesGenresArray, ...this.tvSeriesGenresArray].sort();
+        }
+    },
+    created: function() {
+        axios
+            .get(this.moviesGenresApi.apiUrl, {
+            params: {
+                api_key: this.moviesGenresApi.apiKey,
+                language: this.moviesGenresApi.apiLanguage,
+            }
+            })
+            .then(response => {
+                response.data.genres.forEach(genres => {
+                    this.moviesGenresArray.push(genres.name);
+                });
+            })
+            .catch(err => {
+                console.log('Errore: ', err);
+            })
+
+        axios
+            .get(this.tvSeriesGenresApi.apiUrl, {
+            params: {
+                api_key: this.tvSeriesGenresApi.apiKey,
+                language: this.tvSeriesGenresApi.apiLanguage,
+            }
+            })
+            .then(response => {
+                response.data.genres.forEach(genres => {
+                    this.tvSeriesGenresArray.push(genres.name);
+                });
+            })
+            .catch(err => {
+                console.log('Errore: ', err);
+            })
+
+    }
 }
 </script>
 
