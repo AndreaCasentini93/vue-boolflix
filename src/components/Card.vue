@@ -1,5 +1,5 @@
 <template>
-    <a v-if="movie.poster_path" href="#" class="movie_card">
+    <a v-if="movie.poster_path && selectForGenres" href="#" class="movie_card">
         <img 
             class="poster"
             :src="'https://image.tmdb.org/t/p/w342' + movie.poster_path" 
@@ -91,6 +91,13 @@ export default {
         },
         selectedGenre: function() {
             return this.changeGenre;
+        },
+        selectForGenres: function() {
+            if (this.selectedGenre == 'Seleziona Genere' || this.selectedGenre == '' || this.genres.includes(this.selectedGenre)) {
+                return true;
+            } else {
+                return false;
+            }
         }
     },
     methods: {
