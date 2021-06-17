@@ -23,7 +23,13 @@ export default {
     },
     computed: {
         movies: function() {
-            return this.searchArray;
+            let array = [];
+            this.searchArray.forEach(element => {
+                if (element.genres.includes(this.selectedGenre) || this.selectedGenre == '' || this.selectedGenre == 'Seleziona Genere') {
+                    array.push(element)
+                }
+            });
+            return array;
         },
         homeLayout: function() {
             return this.home;
