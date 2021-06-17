@@ -4,7 +4,9 @@
             <Card v-for="movie, index in movies" :key="index" :movieDetails="movie" :changeGenre="selectedGenre"/>
         </section>
         <section v-else-if="!homeLayout" class="not_found d-flex flex-column justify-content-center align-items-center"><div>Siamo spiacenti...</div>Nessun risultato trovato</section>
-        <section v-else class="home_layout d-flex flex-column justify-content-center align-items-center text-center"><div>Benvenuto!</div>Inizia la tua ricerca</section>
+        <section v-else class="home_layout">
+            <h2 class="d-flex flex-column justify-content-center align-items-center text-center"><div>Benvenuto!</div>Inizia la tua ricerca</h2>
+        </section>
     </main>
 </template>
 
@@ -60,12 +62,18 @@ export default {
         }
 
         .home_layout {
-            @include home-message(90px, 100px);
-            padding: 0 20px;
+            width: 100%;
+            height: 100%;
             background: url('../assets/images/start-bg.png');
             background-size: cover;
             background-position: center;
-            text-shadow: 5px 5px 8px $shadow-color;
+
+            h2 {
+                @include home-message(90px, 100px);
+                padding: 0 20px;
+                background-color: rgba($bg-color, .7);
+                text-shadow: 5px 5px 8px $shadow-color;
+            }
         }
     }
 </style>

@@ -52,7 +52,8 @@ export default {
             menu: [
                 'Home',
                 'Serie Tv',
-                'Film'
+                'Film',
+                'Originali'
             ],
             genre: ''
         }
