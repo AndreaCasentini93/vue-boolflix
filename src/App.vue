@@ -46,25 +46,18 @@ export default {
       tvSeriesArray: [],
       homeLayout: true,
       moviesFound: true,
-      tvSeriesFound: true
+      tvSeriesFound: true,
+      loading: false
     }
   },
   computed: {
     movies: function() {
       return [...this.moviesArray, ...this.tvSeriesArray].sort(function(a, b){return b.popularity-a.popularity});
     },
-    loading: function(){
-      if (this.movies.length == 0 && this.homeLayout) {
-        return false;
-      } else if ((this.moviesArray.length == 0 || this.tvSeriesArray.length == 0) && (this.moviesFound && this.tvSeriesFound)) {
-        return true;
-      } else {
-        return false
-      }
-    }
   },
   methods: {
     titleSearched: function(val) {
+      this.loading = true;
       this.title = val;
       this.homeLayout = false;
       this.moviesArray = [];
@@ -72,7 +65,7 @@ export default {
       this.moviesFound = true;
       this.tvSeriesFound = true;
       
-      // 1° Chiamata API
+      // Chiamata API per film
       axios
         .get(this.moviesApi.apiUrl, {
           params: {
@@ -85,6 +78,7 @@ export default {
           this.moviesArray = response.data.results;
           if (this.moviesArray.length == 0) {
             this.moviesFound = false;
+            this.loading = false;
           }
 
           // Chiamata API per attori film
@@ -123,6 +117,9 @@ export default {
                           movie.genres.push(response.data.genres[i].name);
                         }
                         this.moviesArray.push(movie);
+                        if (this.moviesArray.length == newMoviesArray2.length) {
+                          this.loading = false;
+                        }
                       })
                       .catch(err => {
                         console.log('Errore: ', err);
@@ -141,7 +138,7 @@ export default {
           console.log('Errore: ', err);
         })
       
-      // 2° Chiamata API
+      // Chiamata API per serie TV
       axios
         .get(this.tvSeriesApi.apiUrl, {
           params: {
@@ -154,6 +151,7 @@ export default {
           this.tvSeriesArray = response.data.results;
           if (this.tvSeriesArray.length == 0) {
             this.tvSeriesFound = false;
+            this.loading = false;
           }
 
           // Chiamata API per attori serie TV
@@ -192,6 +190,9 @@ export default {
                           movie.genres.push(response.data.genres[i].name);
                         }
                         this.tvSeriesArray.push(movie);
+                        if (this.tvSeriesArray.length == newTvSeriesArray2.length) {
+                          this.loading = false;
+                        }
                       })
                       .catch(err => {
                         console.log('Errore: ', err);
