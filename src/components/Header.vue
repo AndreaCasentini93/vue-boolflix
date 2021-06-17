@@ -17,7 +17,7 @@
             <!-- NAVBAR RIGHT -->
             <div class="navbar_right d-flex align-items-center">
                 <Search @search="titleSearched"/>
-                <SelectGenre />
+                <SelectGenre @genreCall="changeGenre"/>
                 <ul class="d-flex align-items-center">
                     <li>
                         <a href="#">
@@ -58,7 +58,10 @@ export default {
     },
     methods: {
         titleSearched: function(val) {
-            this.$emit('search', val)
+            this.$emit('search', val);
+        },
+        changeGenre: function(val) {
+            this.$emit('select', val);
         }
     }
 }

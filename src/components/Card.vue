@@ -47,7 +47,8 @@
 export default {
     name: 'Card',
     props: {
-        movieDetails: Object
+        movieDetails: Object,
+        changeGenre: String
     },
     data: function() {
         return {
@@ -87,6 +88,9 @@ export default {
         },
         plot: function() {
             return this.movie.overview;
+        },
+        selectedGenre: function() {
+            return this.changeGenre;
         }
     },
     methods: {

@@ -1,7 +1,7 @@
 <template>
-    <select class="form-select" aria-label="Default select example">
+    <select @change="changeGenre" class="form-select" aria-label="Default select example" v-model="selectedGenre">
         <option selected>Seleziona Genere</option>
-        <option v-for="genres, index in allGenresArray" :key="index" value="genres">{{ genres }}</option>
+        <option v-for="genres, index in allGenresArray" :key="index" :value="genres">{{ genres }}</option>
     </select>
 </template>
 
@@ -23,12 +23,18 @@ export default {
                 apiLanguage: 'it-IT'
             },
             moviesGenresArray: [],
-            tvSeriesGenresArray: []
+            tvSeriesGenresArray: [],
+            selectedGenre: 'Seleziona Genere'
         }
     },
     computed: {
         allGenresArray: function() {
             return [...this.moviesGenresArray, ...this.tvSeriesGenresArray].sort();
+        }
+    },
+    methods: {
+        changeGenre: function() {
+            this.$emit('genreCall', this.selectedGenre);
         }
     },
     created: function() {

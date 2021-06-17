@@ -2,11 +2,11 @@
   <div id="app">
     <template v-if="!loading">
       <!-- HEADER -->
-      <Header @search="titleSearched"/>
+      <Header @search="titleSearched" @select="genreSelected"/>
       <!-- /HEADER -->
 
       <!-- MAIN -->
-      <Main :searchArray="movies" :home="homeLayout"/>
+      <Main :searchArray="movies" :home="homeLayout" :genreCall="selectedGenre"/>
       <!-- /MAIN -->
     </template>
 
@@ -47,7 +47,8 @@ export default {
       homeLayout: true,
       moviesFound: true,
       tvSeriesFound: true,
-      loading: false
+      loading: false,
+      selectedGenre: ''
     }
   },
   computed: {
@@ -212,6 +213,9 @@ export default {
         .catch(err => {
           console.log('Errore: ', err);
         })
+    },
+    genreSelected: function(val) {
+      this.selectedGenre = val;
     }
   }
 }
